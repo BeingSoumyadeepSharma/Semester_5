@@ -13,30 +13,24 @@ int main(void) {
     // No.of capacities and requirements
     printf("Enter the no.of capacities (1-20): ");
     scanf("%d",&count_cp);
-    printf("Enter the no. of requirements (1-20): ");
+    printf("Enter the no.of requirements (1-20): ");
     scanf("%d",&count_req);
 
     // Entering capacity of every origin
-    printf("\033[01;33m");
     printf("Enter the capacities: \n");
-    printf("\033[0m");
     for(i = 0;i < count_cp;i++){
         printf("Capacity[%d]: ",(i+1));
         scanf("%d",&cp[i]);
     }
     // Entering requirement of every destination
-    printf("\033[01;33m");
     printf("Enter the requirements: \n");
-    printf("\033[0m");
     for(i = 0;i < count_req;i++){
         printf("Requirements[%d]: ",(i+1));
         scanf("%d",&req[i]);
     }
 
     // Entering the cost matrix
-    printf("\033[01;33m");
     printf("Enter the cost matrix: \n");
-    printf("\033[0m");
     for(i=0;i<count_cp;i++){
         for(j=0;j<count_req;j++){
             printf("Cost[%d][%d]: ",(i+1),(j+1));
@@ -75,9 +69,7 @@ int main(void) {
     }
 
     // Displaying the final allotment matrix according to NWCM
-    printf("\033[1;32m");
     printf("The Final Allotment Matrix: \n");
-    printf("\033[0m");
     for(i=0;i<count_cp;i++){
         for(j=0;j<count_req;j++){
             if(allot[i][j] == 0){
