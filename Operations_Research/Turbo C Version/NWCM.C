@@ -8,7 +8,7 @@ void main() {
     int allot[20][20] = {0};
     int count_cp, count_req;
     int i,j, n_allot;
-    int total = 0;
+    int total = 0, total_cp = 0, total_req = 0;
 	n_allot = 0;
 
     clrscr();
@@ -23,12 +23,14 @@ void main() {
     for(i = 0;i < count_cp;i++){
 	printf("Capacity[%d]: ",(i+1));
 	scanf("%d",&cp[i]);
+	total_cp = total_cp + cp[i];
     }
     // Entering requirement of every destination
     printf("Enter the requirements: \n");
     for(i = 0;i < count_req;i++){
 	printf("Requirements[%d]: ",(i+1));
 	scanf("%d",&req[i]);
+	total_req = total_req + req[i];
     }
 
     // Entering the cost matrix
@@ -38,6 +40,15 @@ void main() {
 	    printf("Cost[%d][%d]: ",(i+1),(j+1));
 	    scanf("%d",&cost[i][j]);
 	}
+    }
+	
+	if(total_req < total_cp) {
+	req[count_req] = total_cp - total_req;
+	count_req++;
+    }
+    else if(total_cp < total_req) {
+	cp[count_cp] = total_req - total_cp;
+	count_cp++;
     }
 
 	printf("The Cost Matrix: \n");
