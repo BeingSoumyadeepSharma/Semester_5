@@ -7,14 +7,15 @@ void main() {
     int cost[20][20] = {0};
     int allot[20][20] = {0};
     int count_cp, count_req;
-    int i,j;
+    int i,j, n_allot;
     int total = 0;
+	n_allot = 0;
 
     clrscr();
     // No.of capacities and requirements
     printf("Enter the no.of capacities (1-20): ");
     scanf("%d",&count_cp);
-    printf("Enter the no.of requirements (1-20): ");
+    printf("Enter the no. of requirements (1-20): ");
     scanf("%d",&count_req);
 
     // Entering capacity of every origin
@@ -39,6 +40,14 @@ void main() {
 	}
     }
 
+	printf("The Cost Matrix: \n");
+	for(i=0;i<count_cp;i++){
+	for(j=0;j<count_req;j++){
+	    printf("%d\t", cost[i][j]);
+	}
+	printf("\n");
+    }
+
     // Main Logic
     i = 0,j = 0;
     while(i < count_cp && j < count_req) {
@@ -49,6 +58,7 @@ void main() {
 	    req[j] = req[j] - cp[i];
 	    cp[i] = 0;
 	    i++;
+		n_allot++;
 	}
 	else if(cp[i] > req[j]){
 	    // if capacity more than requirement
@@ -57,6 +67,7 @@ void main() {
 	    cp[i] = cp[i] - req[j];
 	    req[j] = 0;
 	    j++;
+		n_allot++;
 	}
 	else if(cp[i] == req[j]){
 	    // if capacity equal to requirement
@@ -66,6 +77,7 @@ void main() {
 	    req[j] = 0;
 	    i++;
 	    j++;
+		n_allot++;
 	}
     }
 
@@ -82,6 +94,13 @@ void main() {
 	}
 	printf("\n");
     }
+
+	if(n_allot != (count_cp + count_req - 1)) {
+		printf("The Matrix is Degenerate!\n");
+	}
+	else {
+		printf("The Matrix is Non-Degenerate!\n");
+	}
 
     // Displaying the Total Cost for Transportation
     printf("Total Cost in NWCM: %d\n",total);
