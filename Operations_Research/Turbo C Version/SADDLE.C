@@ -5,6 +5,11 @@
 #define CAP_ROW_SIZE 20
 #define CAP_COLUMN_SIZE 20
 
+typedef struct Value_Pos{
+    int val, index;
+} INDICATOR;
+
+
 int payoff_mat[CAP_ROW_SIZE][CAP_COLUMN_SIZE] = {0};
 int row_min_arr[CAP_ROW_SIZE] = {0};
 int col_max_arr[CAP_COLUMN_SIZE] = {0};
@@ -37,33 +42,47 @@ void max_col(int m, int n) {
     }
 }
 
-int maxi_min(int m,int n) {
+INDICATOR maxi_min(int m,int n) {
+    INDICATOR A;
+    int pos;
     int max;
     int i;
     max = row_min_arr[0];
+    pos = 0;
     for(i = 1;i < m;i++) {
         if(max < row_min_arr[i]) {
             max = row_min_arr[i];
+            pos = i;
         }
     }
-    return max;
+    A.val = max;
+    A.index = pos;
+    return A;
 }
 
-int mini_max(int m,int n) {
+INDICATOR mini_max(int m,int n) {
+    INDICATOR A;
+    int pos;
     int min;
     int j;
     min = col_max_arr[0];
-    for(j = 0;j < n;j++) {
+    pos = 0;
+    for(j = 1;j < n;j++) {
         if(min > col_max_arr[j]) {
             min = col_max_arr[j];
+            pos = j;
         }
     }
-    return min;
+    A.val = min;
+    A.index = pos;
+    return A;
 }
 
 void main() {
     int num_playerA_strategy, num_playerB_strategy, i, j;
-    int minimax, maximin, saddle_point = 0;
+    INDICATOR minimax, maximin; 
+    int saddle_point = 0;
+
     clrscr();
     printf("Enter the number of Player A Strategies (1-20): ");
     scanf("%d", &num_playerA_strategy);
@@ -104,17 +123,19 @@ void main() {
     printf("\n\n");
 
     minimax = mini_max(num_playerA_strategy, num_playerB_strategy);
-    printf("Minimax = %d\n", minimax);
+    printf("Minimax = %d\n", minimax.val);
     maximin = maxi_min(num_playerA_strategy, num_playerB_strategy);
-    printf("Maximin = %d\n", maximin);
+    printf("Maximin = %d\n", maximin.val);
 
-    if(minimax == maximin) {
-        saddle_point = minimax;
+    if(minimax.val == maximin.val) {
+        saddle_point = minimax.val;
+        printf("Saddle Point found at location (%d, %d)\n", (maximin.index + 1), (minimax.index + 1));
         printf("The Saddle Point: %d\n", saddle_point);
     }
     else {
         printf("Saddle Point is not present!!\n");
     }
+
     getch();
 }
 

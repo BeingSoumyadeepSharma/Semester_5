@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "NWCM.C": "cpp",
-        "MATRIX~1.C": "cpp"
+        "MATRIX~1.C": "cpp",
+        "SADDLE.C": "cpp",
+        "SAMIX.C": "cpp",
+        "VMPEN.C": "cpp",
+        "ASRED.C": "cpp"
     }
 }
