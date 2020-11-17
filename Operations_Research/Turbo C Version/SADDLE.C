@@ -38,11 +38,11 @@ void max_col(int m, int n) {
                 max = payoff_mat[i][j];
             }
         }
-        col_max_arr[j] = max;
+	col_max_arr[j] = max;
     }
 }
 
-INDICATOR maxi_min(int m,int n) {
+INDICATOR maxi_min(int m) {
     INDICATOR A;
     int pos;
     int max;
@@ -50,17 +50,17 @@ INDICATOR maxi_min(int m,int n) {
     max = row_min_arr[0];
     pos = 0;
     for(i = 1;i < m;i++) {
-        if(max < row_min_arr[i]) {
-            max = row_min_arr[i];
-            pos = i;
-        }
+	if(max < row_min_arr[i]) {
+	    max = row_min_arr[i];
+	    pos = i;
+	}
     }
     A.val = max;
     A.index = pos;
     return A;
 }
 
-INDICATOR mini_max(int m,int n) {
+INDICATOR mini_max(int n) {
     INDICATOR A;
     int pos;
     int min;
@@ -68,10 +68,10 @@ INDICATOR mini_max(int m,int n) {
     min = col_max_arr[0];
     pos = 0;
     for(j = 1;j < n;j++) {
-        if(min > col_max_arr[j]) {
-            min = col_max_arr[j];
-            pos = j;
-        }
+	if(min > col_max_arr[j]) {
+	    min = col_max_arr[j];
+	    pos = j;
+	}
     }
     A.val = min;
     A.index = pos;
@@ -80,7 +80,7 @@ INDICATOR mini_max(int m,int n) {
 
 void main() {
     int num_playerA_strategy, num_playerB_strategy, i, j;
-    INDICATOR minimax, maximin; 
+    INDICATOR minimax, maximin;
     int saddle_point = 0;
 
     clrscr();
@@ -92,18 +92,18 @@ void main() {
 
     printf("Enter the elements of the Payoff Matrix one by one: \n");
     for(i = 0;i < num_playerA_strategy;i++) {
-        for(j = 0;j < num_playerB_strategy;j++) {
-            printf("Enter element[%d][%d]: ", (i+1), (j+1));
-            scanf("%d", &payoff_mat[i][j]);
-        }
+	for(j = 0;j < num_playerB_strategy;j++) {
+	    printf("Enter element[%d][%d]: ", (i+1), (j+1));
+	    scanf("%d", &payoff_mat[i][j]);
+	}
     }
 
     printf("The Payoff Matrix: \n");
     for(i = 0;i < num_playerA_strategy;i++) {
-        for(j = 0;j < num_playerB_strategy;j++) {
-            printf("%d\t", payoff_mat[i][j]);
-        }
-        printf("\n");
+	for(j = 0;j < num_playerB_strategy;j++) {
+	    printf("%d\t", payoff_mat[i][j]);
+	}
+	printf("\n");
     }
     printf("\n");
 
@@ -112,30 +112,31 @@ void main() {
 
     printf("The Row Minimums: \n");
     for(i = 0;i < num_playerA_strategy;i++) {
-        printf("%d\t", row_min_arr[i]);
+	printf("%d\t", row_min_arr[i]);
     }
     printf("\n\n");
 
     printf("The Column Maximums: \n");
     for(j = 0;j < num_playerB_strategy;j++) {
-        printf("%d\t", col_max_arr[j]);
+	printf("%d\t", col_max_arr[j]);
     }
     printf("\n\n");
 
-    minimax = mini_max(num_playerA_strategy, num_playerB_strategy);
+    minimax = mini_max(num_playerB_strategy);
     printf("Minimax = %d\n", minimax.val);
-    maximin = maxi_min(num_playerA_strategy, num_playerB_strategy);
+    maximin = maxi_min(num_playerA_strategy);
     printf("Maximin = %d\n", maximin.val);
 
     if(minimax.val == maximin.val) {
-        saddle_point = minimax.val;
-        printf("Saddle Point found at location (%d, %d)\n", (maximin.index + 1), (minimax.index + 1));
-        printf("The Saddle Point: %d\n", saddle_point);
+	saddle_point = minimax.val;
+	printf("Saddle Point found at location (%d, %d)\n", (maximin.index + 1), (minimax.index + 1));
+	printf("The Saddle Point: %d\n", saddle_point);
     }
     else {
-        printf("Saddle Point is not present!!\n");
+	printf("Saddle Point is not present!!\n");
     }
 
     getch();
 }
 
+                       	

@@ -5,46 +5,46 @@
 #define MAX_LIMIT 20
 
 void row_pen(int a[MAX_LIMIT][MAX_LIMIT], int m, int n) {
-    int row_penalty[m];
+    int row_penalty[MAX_LIMIT];
     int i, j, min, secondmin;
     for(i=0;i < m;i++) {
-        min = secondmin = INT_MAX;
-        for(j=0;j < n;j++) {
-            if(a[i][j] < min) {
-                secondmin = min;
-                min = a[i][j];
-            }
-            else if (a[i][j] < secondmin && a[i][j] != min) 
-                secondmin = a[i][j];
-        }
-        row_penalty[i] = secondmin - min;
+	min = secondmin = INT_MAX;
+	for(j=0;j < n;j++) {
+	    if(a[i][j] < min) {
+		secondmin = min;
+		min = a[i][j];
+	    }
+	    else if (a[i][j] < secondmin && a[i][j] != min)
+		secondmin = a[i][j];
+	}
+	row_penalty[i] = secondmin - min;
     }
     printf("The Row Penalty: \n");
     for(i = 0;i < m;i++) {
-        printf("%d\t", row_penalty[i]);
+	printf("%d\t", row_penalty[i]);
     }
     printf("\n\n");
 }
 
 void col_pen(int a[MAX_LIMIT][MAX_LIMIT], int m, int n) {
-    int col_penalty[n];
+    int col_penalty[MAX_LIMIT];
     int i, j, min, secondmin;
     for(i=0;i < n;i++) {
-        min = secondmin = INT_MAX;
-        for(j=0;j < m;j++) {
-            if(a[j][i] < min) {
-                secondmin = min;
-                min = a[j][i];
-            }
-            else if (a[j][i] < secondmin && a[j][i] != min) 
-                secondmin = a[j][i];
-        }
-        col_penalty[i] = secondmin - min;
+	min = secondmin = INT_MAX;
+	for(j=0;j < m;j++) {
+	    if(a[j][i] < min) {
+		secondmin = min;
+		min = a[j][i];
+	    }
+	    else if (a[j][i] < secondmin && a[j][i] != min)
+		secondmin = a[j][i];
+	}
+	col_penalty[i] = secondmin - min;
     }
-    
+
     printf("The Column Penalty: \n");
     for(j = 0;j < n;j++) {
-        printf("%d\t", col_penalty[j]);
+	printf("%d\t", col_penalty[j]);
     }
     printf("\n");
 }
