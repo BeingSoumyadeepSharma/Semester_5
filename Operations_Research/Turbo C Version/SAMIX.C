@@ -86,11 +86,13 @@ void mixedStrategy(int a[CAP_ROW_SIZE][CAP_COLUMN_SIZE]) {
     y1 = (float)((a[1][1] - a[0][1]) / ((float)(a[0][0] + a[1][1]) - (a[0][1] + a[1][0])));
     y2 = (float)((a[0][0] - a[1][0]) / ((float)(a[0][0] + a[1][1]) - (a[0][1] + a[1][0])));
     v = (float)(((a[0][0] * a[1][1]) - (a[0][1] * a[1][0])) / ((float)(a[0][0] + a[1][1]) - (a[0][1] + a[1][0])));
+    printf("Player A Strategies: \n");
     printf("x1 = %.2f\n", x1);
     printf("x2 = %.2f\n", x2);
+    printf("Player B Strategies: \n");
     printf("y1 = %.2f\n", y1);
     printf("y2 = %.2f\n", y2);
-    printf("Value of the Game: %.2f\n", v);
+    printf("The Value of the Game: %.2f\n", v);
 }
 
 void main() {
@@ -139,7 +141,29 @@ void main() {
     if(minimax.val == maximin.val) {
 	saddle_point = minimax.val;
 	printf("Saddle Point found at location (%d, %d)\n", (maximin.index + 1), (minimax.index + 1));
-	printf("The Saddle Point (Value of the Game): %d\n", saddle_point);
+	printf("The Saddle Point: %d\n", saddle_point);
+    printf("The Value of the Game: %d\n", saddle_point);
+        printf("Player A Strategies: \n");
+        for(i=0;i < num_playerA_strategy;i++) {
+            if(maximin.index == i) {
+                printf("%d,\t", 1);
+            }
+            else {
+                printf("%d,\t", 0);
+            }
+        }
+        printf("\b\n");
+
+        printf("Player B Strategies: \n");
+        for(i=0;i < num_playerB_strategy;i++) {
+            if(minimax.index == i) {
+                printf("%d,\t", 1);
+            }
+            else {
+                printf("%d,\t", 0);
+            }
+        }
+        printf("\n");
     }
     else {
 	printf("Saddle Point is not present!! Going for Mixed Strategy....\n");

@@ -130,6 +130,28 @@ int main(void) {
         saddle_point = minimax.val;
         printf("Saddle Point found at location (%d, %d)\n", (maximin.index + 1), (minimax.index + 1));
         printf("The Saddle Point: %d\n", saddle_point);
+        printf("The Value of the Game: %d\n", saddle_point);
+        printf("Player A Strategies: \n");
+        for(i=0;i < num_playerA_strategy;i++) {
+            if(maximin.index == i) {
+                printf("%d,\t", 1);
+            }
+            else {
+                printf("%d,\t", 0);
+            }
+        }
+        printf("\b\n");
+
+        printf("Player B Strategies: \n");
+        for(i=0;i < num_playerB_strategy;i++) {
+            if(minimax.index == i) {
+                printf("%d,\t", 1);
+            }
+            else {
+                printf("%d,\t", 0);
+            }
+        }
+        printf("\n");
     }
     else {
         printf("Saddle Point is not present!!\n");
